@@ -1,15 +1,15 @@
 function Gamehistory() {
     let round = 0;
-    let acutalround=0;
+    let acutalround = 0;
     let player1, player2;
-    let player1win=0;
+    let player1win = 0;
     let history = [];
     const setgame = (f, s) => {
         player1 = f;
         player2 = s;
     };
     const getplayer = () => { return [player1, player2] };
-    const winnerhistory = (player) => { history[++round] =`${player1.sign==player? "player1" : "player2"} win`; if(player1.sign == player){player1win++};acutalround++;};
+    const winnerhistory = (player) => { history[++round] = `${player1.sign == player ? "player1" : "player2"} win`; if (player1.sign == player) { player1win++ }; acutalround++; };
     const drawhistory = () => { history[++round] = "draw!" };
     const gethistory = () => { return history };
     const getactualround = () => acutalround;
@@ -25,11 +25,12 @@ function Game() {
     const getgameboard = () => gameboard;
     const getlaps = () => laps;
     const setlaps = () => ++laps;
-    const clearGame = (cell, gamestart, dialog=false)=>{
-        if (dialog==false){
+    const clearGame = (cell, gamestart, dialog = false) => {
+        if (dialog == false) {
             return cell.forEach(function (element) { element.textContent = "" });
-    }
-        return result(dialog,gamestart,cell).showModal();
+        }
+        cell.forEach(function (element) { element.textContent = "" });
+        return result(dialog, gamestart, cell).showModal();
     };
     const addgameboard = (chose, index) => { gameboard[index] = chose };
     return { getgameboard, getlaps, setlaps, addgameboard, clearGame };
@@ -44,7 +45,7 @@ const startscreen = function () {
     const reset = document.querySelector("#resetButton");
     const loading = document.querySelector("#loading");
 
-    window.loading = setTimeout(function(){loading.setAttribute("style","display:none;")},2000)
+    window.loading = setTimeout(function () { loading.setAttribute("style", "display:none;") }, 2000)
     // ox 선택한다.
     let gamestart = Gamehistory();
     let playero = player("o");
@@ -71,10 +72,10 @@ const startscreen = function () {
 
     let p = 0;
     let newround = Game();
-    reset.addEventListener("click",()=>{newround.clearGame(cell,gamestart);newround=Game();})
+    reset.addEventListener("click", () => { newround.clearGame(cell, gamestart); newround = Game(); })
     console.log(newround.getgameboard());
     Array.from(cell).forEach(function (element) {
-            element.addEventListener('click', function tik(event) {
+        element.addEventListener('click', function tik(event) {
             if (newround.getgameboard()[event.target.id] == 0) {
                 newround.setlaps();
                 element.textContent = gamestart.getplayer()[p].sign;
@@ -114,27 +115,26 @@ function player(sign) {
     return { sign };
 }
 
-function result(dialog,gamestart,cell){
+function result(dialog, gamestart, cell) {
     // dialog가 떴을 때 gamehistory에서 player1을 가져오고 
     // actualround-player1==3이면 player2승리
     // player1==3이면 player1 승리
     // 만약 아무것도 아니면 next가 나오는 dialog 제작.
     const next = document.querySelector("#nextButton");
-    const r=document.querySelector(".result");
+    const r = document.querySelector(".result");
     const finish = document.querySelector("#finishButton");
-    if (gamestart.getactualround()-gamestart.getplayer1win()==3){
-        r.childNodes[1].childNodes[1].textContent=`player2 Win`;
-        finish.addEventListener("click",()=>location.reload());
+    if (gamestart.getactualround() - gamestart.getplayer1win() == 3) {
+        r.childNodes[1].childNodes[1].textContent = `player2 Win`;
+        finish.addEventListener("click", () => location.reload());
         return r;
-        }else if (gamestart.getplayer1win()==3){
-        r.childNodes[1].childNodes[1].textContent=`player1 Win`
-        finish.addEventListener("click",()=>location.reload());
+    } else if (gamestart.getplayer1win() == 3) {
+        r.childNodes[1].childNodes[1].textContent = `player1 Win`
+        finish.addEventListener("click", () => location.reload());
         return r;
-    }else{
-    const newli = document.createElement("li");
-    newli.textContent=`${gamestart.getround()+"round"} : `+gamestart.gethistory()[gamestart.gethistory().length-1];
-    next.parentElement.childNodes[1].appendChild(newli);
-    cell.forEach(function (element) { element.textContent = "" });
+    } else {
+        const newli = document.createElement("li");
+        newli.textContent = `${gamestart.getround() + "round"} : ` + gamestart.gethistory()[gamestart.gethistory().length - 1];
+        next.parentElement.childNodes[1].appendChild(newli);
     }
     return dialog;
 }
