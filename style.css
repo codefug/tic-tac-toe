@@ -36,6 +36,36 @@ button#start{
     background-color: black;
     color:white;
 }
+dialog::backdrop{
+    background-image: linear-gradient(to bottom, black, rgba(128, 128, 128, 0.514));
+}
+.popup{
+    padding:2rem;
+    border-radius: 1rem;
+    align-items: center;
+}
+.popup *{
+    text-align:center;
+    list-style: none;
+    padding:2rem;
+    border-radius: 1rem;
+}
+.popup button{
+    padding-block: 1rem;
+}
+.result{
+    padding:2rem;
+    border-radius: 1rem;
+    align-items: center;
+}
+.result *{
+    text-align:center;
+    padding:2rem;
+    border-radius: 1rem;
+}
+.result button{
+    padding-block: 1rem;
+}
 /* 전체 설정 */
 @font-face {
     font-family: myfont;
@@ -112,6 +142,10 @@ footer {
 .cell {
     box-sizing: border-box;
     border: 1px solid black;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
 }
 
 .cell:nth-child(1) {

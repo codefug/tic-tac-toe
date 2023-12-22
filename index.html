@@ -11,32 +11,46 @@
 </head>
 
 <body>
-    <!-- <div id="startscreen" class="screenon">
+    <div id="startscreen" class="screenon">
         <form id="startform">
             <h2>first player<h2>
-                <div>
-            <button id="o" type="button" class="choice">
-                <p>O</p>
-            </button>
-            <button id="x" type="button" class="choice">
-                <p>X</p>
-            </button></div>
-            <button type="button" id="start">Start!</button>
+                    <div>
+                        <button id="o" type="button" class="choice">
+                            <p>O</p>
+                        </button>
+                        <button id="x" type="button" class="choice">
+                            <p>X</p>
+                        </button>
+                    </div>
+                    <button type="button" id="start">Start!</button>
         </form>
-    </div> -->
+    </div>
+    <dialog class="popup">
+        <form method="dialog">
+            <ol>
+            </ol>
+            <button value="confirm" id="nextButton">next</button>
+        </form>
+    </dialog>
+    <dialog class="result">
+        <form method="dialog">
+            <p></p>
+            <button value="reload" id="finishButton">finish</button>
+        </form>
+    </dialog>
     <header>
         <h1>Tic-Tac-Toe</h1>
     </header>
     <div id="gameboard">
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
+        <div id="1" class="cell"></div>
+        <div id="2" class="cell"></div>
+        <div id="3" class="cell"></div>
+        <div id="4" class="cell"></div>
+        <div id="5" class="cell"></div>
+        <div id="6" class="cell"></div>
+        <div id="7" class="cell"></div>
+        <div id="8" class="cell"></div>
+        <div id="9" class="cell"></div>
     </div>
     <button id="resetButton">reset</button>
     <footer>
