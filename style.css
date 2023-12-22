@@ -1,3 +1,35 @@
+/* loading */
+#loading{
+    background-image: linear-gradient(to right bottom, black, rgba(128, 128, 128));
+    z-index:2;
+    position:fixed;
+    height:100vh;
+    width:100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#loading>div{
+    background-image: linear-gradient(to right bottom, black, rgba(128, 128, 128));
+    height: 50rem;
+    width: 50rem;
+    animation: 2s linear infinite moving;
+    background-size: 200% 100%;
+    color:white;
+    font-size:5rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+@keyframes moving {
+    100%{
+        background-position: 0 100%;
+    }
+    0%{
+        background-position: 100% 0;
+    }
+}
+/* startscreen */
 #startscreen {
     position: fixed;
     height: 100vh;
@@ -36,6 +68,9 @@ button#start{
     background-color: black;
     color:white;
 }
+dialog{
+    font-size: 2rem;
+}
 dialog::backdrop{
     background-image: linear-gradient(to bottom, black, rgba(128, 128, 128, 0.514));
 }
@@ -52,6 +87,10 @@ dialog::backdrop{
 }
 .popup button{
     padding-block: 1rem;
+}
+.popup li{
+    margin:0;
+    padding:0;
 }
 .result{
     padding:2rem;

@@ -9,13 +9,14 @@ function Gamehistory() {
         player2 = s;
     };
     const getplayer = () => { return [player1, player2] };
-    const winnerhistory = (player) => { history[++round] =`${player} win`; if(player1.sign == player){player1win++};acutalround++;};
+    const winnerhistory = (player) => { history[++round] =`${player1.sign==player? "player1" : "player2"} win`; if(player1.sign == player){player1win++};acutalround++;};
     const drawhistory = () => { history[++round] = "draw!" };
     const gethistory = () => { return history };
     const getactualround = () => acutalround;
     const getplayer1win = () => player1win;
+    const getround = () => round
 
-    return { setgame, getplayer, drawhistory, winnerhistory, gethistory, getactualround, getplayer1win };
+    return { getround, setgame, getplayer, drawhistory, winnerhistory, gethistory, getactualround, getplayer1win };
 }
 
 function Game() {
@@ -24,7 +25,10 @@ function Game() {
     const getgameboard = () => gameboard;
     const getlaps = () => laps;
     const setlaps = () => ++laps;
-    const clearGame = (cell, gamestart, dialog)=>{
+    const clearGame = (cell, gamestart, dialog=false)=>{
+        if (dialog==false){
+            return cell.forEach(function (element) { element.textContent = "" });
+    }
         return result(dialog,gamestart,cell).showModal();
     };
     const addgameboard = (chose, index) => { gameboard[index] = chose };
@@ -38,6 +42,9 @@ const startscreen = function () {
     const cell = document.querySelectorAll(".cell");
     const dialog = document.querySelector("dialog");
     const reset = document.querySelector("#resetButton");
+    const loading = document.querySelector("#loading");
+
+    window.loading = setTimeout(function(){loading.setAttribute("style","display:none;")},2000)
     // ox 선택한다.
     let gamestart = Gamehistory();
     let playero = player("o");
@@ -64,6 +71,8 @@ const startscreen = function () {
 
     let p = 0;
     let newround = Game();
+    reset.addEventListener("click",()=>{newround.clearGame(cell,gamestart);newround=Game();})
+    console.log(newround.getgameboard());
     Array.from(cell).forEach(function (element) {
             element.addEventListener('click', function tik(event) {
             if (newround.getgameboard()[event.target.id] == 0) {
@@ -123,7 +132,7 @@ function result(dialog,gamestart,cell){
         return r;
     }else{
     const newli = document.createElement("li");
-    newli.textContent=gamestart.gethistory()[gamestart.gethistory().length-1];
+    newli.textContent=`${gamestart.getround()+"round"} : `+gamestart.gethistory()[gamestart.gethistory().length-1];
     next.parentElement.childNodes[1].appendChild(newli);
     cell.forEach(function (element) { element.textContent = "" });
     }
